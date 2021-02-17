@@ -34,14 +34,14 @@ async function run(m) {
     const arr = new Float64Array(getNumbers(10000000));
 
     let startMs = Date.now();
-    let result = sum(arr);
+    let result = m.sum(arr);
     let endMs = Date.now();
-    console.log('JavaScript sum =', result, 'in', endMs - startMs, 'ms');
+    console.log('Rust sum =', result, 'in', endMs - startMs, 'ms');
 
     startMs = Date.now();
-    result = m.sum(arr);
+    result = sum(arr);
     endMs = Date.now();
-    console.log('Rust sum =', result, 'in', endMs - startMs, 'ms');
+    console.log('JavaScript sum =', result, 'in', endMs - startMs, 'ms');
   } catch (e) {
     console.error(e);
   }
