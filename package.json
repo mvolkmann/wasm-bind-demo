@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "serve": "webpack-dev-server"
   },
   "author": "R. Mark Volkmann",
