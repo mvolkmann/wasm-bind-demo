@@ -15,19 +15,14 @@ pub fn greet(name: &str) {
 }
 
 #[wasm_bindgen]
-pub fn sum(arr: &Float64Array) -> f64 {
-   //let data = unsafe { arr.view() };
-   //let data = unsafe { Float64Array::view(&arr) };
-   let len = arr.length();
-   log(&format!("length = {}", len));
-   let vec = arr.to_vec();
-   /*
-   let mut sum = 0.0;
-   for n in vec {
-     sum += n;
-     //log(&format!("n = {}", n));
-   }
-   sum
-   */
-   vec.iter().sum()
+pub fn sum(data: &Float64Array) -> f64 {
+    //let vec: Vec<f64> = data.to_vec();
+    //vec.iter().sum()
+    data.to_vec().iter().sum()
+}
+
+#[wasm_bindgen]
+pub fn get_vector_pointer(count: usize) -> *mut f64 {
+    let mut vec: Vec<f64> = Vec::with_capacity(count);
+    vec.as_mut_ptr()
 }
