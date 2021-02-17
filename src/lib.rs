@@ -4,6 +4,9 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 extern "C" {
     fn alert(s: &str);
+
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
 }
 
 #[wasm_bindgen]
@@ -12,14 +15,18 @@ pub fn greet(name: &str) {
 }
 
 #[wasm_bindgen]
-pub fn foo(arr: &Float64Array) -> u32 {
+pub fn sum(arr: &Float64Array) -> f64 {
    //let data = unsafe { Float64Array::view(&arr) };
    let len = arr.length();
-   println!("length = {:?}", len);
+   log(&format!("length = {}", len));
+   let vec = arr.to_vec();
    /*
-   for n in data.iter() {
-     println!("n = {}", n);
+   let mut sum = 0.0;
+   for n in vec {
+     sum += n;
+     //log(&format!("n = {}", n));
    }
+   sum
    */
-   len
+   vec.iter().sum()
 }

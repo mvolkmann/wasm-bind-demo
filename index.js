@@ -7,7 +7,7 @@ rust
   .then(m => {
     m.greet('World!');
     const arr = new Float64Array([1.2, 2.3, 3.4]);
-    const len = m.foo(arr);
-    console.log('index.js x: len =', len);
+    const sum = m.sum(arr);
+    console.log('index.js: sum =', sum);
   })
   .catch(console.error);
