@@ -16,6 +16,7 @@ pub fn greet(name: &str) {
 
 #[wasm_bindgen]
 pub fn sum(arr: &Float64Array) -> f64 {
+   //let data = unsafe { arr.view() };
    //let data = unsafe { Float64Array::view(&arr) };
    let len = arr.length();
    log(&format!("length = {}", len));

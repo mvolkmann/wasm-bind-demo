@@ -5,7 +5,7 @@ const rust = import('./pkg');
 
 rust
   .then(m => {
-    m.greet('World!');
+    //m.greet('World!');
     const arr = new Float64Array([1.2, 2.3, 3.4]);
     const sum = m.sum(arr);
     console.log('index.js: sum =', sum);
