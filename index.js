@@ -3,7 +3,7 @@
 const wasm = import('./pkg');
 
 const BYTES_PER_DOUBLE = 8;
-const COUNT = 1000000;
+const COUNT = 10000000; // 10 million
 
 /*
 wasm
@@ -24,6 +24,12 @@ function getNumbers(count) {
   return numbers;
 }
 
+function populateNumbers(numbers) {
+  for (let i = 0; i < numbers.length; i++) {
+    numbers[i] = Math.random() * 100;
+  }
+}
+
 function sum(numbers) {
   return numbers.reduce((acc, n) => acc + n);
 }
@@ -42,11 +48,12 @@ async function run(m) {
     let endMs = Date.now();
     console.log('JavaScript sum =', result, 'in', endMs - startMs, 'ms');
 
-    const ptr = m.get_vector_pointer(COUNT);
-    const arr = new Float64Array(numbers, ptr, COUNT * BYTES_PER_DOUBLE);
+    const ptr = m.get_vec_ptr(COUNT);
+    const arr = m.get_array(ptr, COUNT);
+    populateNumbers(arr);
 
     startMs = Date.now();
-    result = m.sum(arr);
+    result = m.sum(ptr, COUNT);
     endMs = Date.now();
     console.log('Rust sum =', result, 'in', endMs - startMs, 'ms');
   } catch (e) {
