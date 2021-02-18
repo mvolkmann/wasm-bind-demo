@@ -14,34 +14,6 @@ pub fn greet(name: &str) {
     alert(&format!("Hello, {}!", name));
 }
 
-/*
-#[wasm_bindgen]
-struct Foo {
-    data: Vec<f64>
-}
-
-#[wasm_bindgen]
-impl Foo {
-    #[wasm_bindgen(constructor)]
-    pub fn new(capacity: usize) -> Self {
-        Self { data: Vec::with_capacity(capacity) }
-    }
-
-    pub fn array_buffer(&mut self) -> Float64Array {
-        unsafe {
-            Float64Array::view_mut_raw(
-                 self.data.as_mut_ptr(),
-                 self.data.len()
-            )
-        }
-    }
-
-    pub fn sum(&self) -> f64 {
-        self.data.iter().sum()
-    }
-}
-*/
-
 #[wasm_bindgen]
 pub fn allocate_space(count: usize) -> *mut f64 {
     let mut v: Vec<f64> = Vec::with_capacity(count);
