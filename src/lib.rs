@@ -43,7 +43,7 @@ impl Foo {
 */
 
 #[wasm_bindgen]
-pub fn get_vec_ptr(count: usize) -> *mut f64 {
+pub fn allocate_space(count: usize) -> *mut f64 {
     let mut v: Vec<f64> = Vec::with_capacity(count);
     let ptr = v.as_mut_ptr();
     std::mem::forget(v); // prevents dropping v when this function exits

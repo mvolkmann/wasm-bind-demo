@@ -16,15 +16,7 @@ wasm
   .catch(console.error);
 */
 
-function getNumbers(count) {
-  const numbers = [];
-  for (let i = 0; i < count; i++) {
-    numbers.push(Math.random() * 100);
-  }
-  return numbers;
-}
-
-function populateNumbers(numbers) {
+function populateArray(numbers) {
   for (let i = 0; i < numbers.length; i++) {
     numbers[i] = Math.random() * 100;
   }
@@ -40,17 +32,14 @@ async function run(m) {
 
     //m.greet('World!');
 
-    //const numbers = new Float64Array(getNumbers(COUNT));
-    const numbers = getNumbers(COUNT);
+    const ptr = m.allocate_space(COUNT);
+    const arr = m.get_array(ptr, COUNT);
+    populateArray(arr);
 
     let startMs = Date.now();
-    let result = sum(numbers);
+    let result = sum(arr);
     let endMs = Date.now();
     console.log('JavaScript sum =', result, 'in', endMs - startMs, 'ms');
-
-    const ptr = m.get_vec_ptr(COUNT);
-    const arr = m.get_array(ptr, COUNT);
-    populateNumbers(arr);
 
     startMs = Date.now();
     result = m.sum(ptr, COUNT);
